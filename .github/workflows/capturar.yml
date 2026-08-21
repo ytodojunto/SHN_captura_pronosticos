@@ -1,1 +1,34 @@
+name: Capturar pronostico SHN
 
+on:
+  schedule:
+    - cron: '0 9 * * *'
+    - cron: '0 21 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  capturar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4
+
+      - name: Capturar pronostico
+        run: python capturar_pronostico.py
+
+      - name: Guardar cambios en el repo
+        run: |
+          git config user.name 'shn-capture-bot'
+          git config user.email 'bot@users.noreply.github.com'
+          git add data/
+          git diff --staged --quiet || git commit -m 'Captura automatica'
+          git push
