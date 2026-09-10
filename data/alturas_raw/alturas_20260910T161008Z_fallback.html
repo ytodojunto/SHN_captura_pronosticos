@@ -1,0 +1,1439 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+	<head>
+
+			<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>SHN | Servicio de HidrografÃ­a Naval</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="" />
+		<link rel="icon" type="image/png" href="/assets/images/favicon.ico" />
+		
+	  	<!-- Facebook and Twitter integration -->
+		<meta property="og:title" content=""/>
+		<meta property="og:image" content=""/>
+		<meta property="og:url" content=""/>
+		<meta property="og:site_name" content=""/>
+		<meta property="og:description" content=""/>
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:image" content="" />
+		<meta name="twitter:url" content="" />
+		<meta name="twitter:card" content="" />
+
+
+
+       <!-- PONCHO CSS:
+    Recomendamos que descargues o instales 'ar-poncho' en tu proyecto.
+    <link href="{{ '/node_modules/ar-poncho/dist/css/roboto-fontface.css' | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ '/node_modules/ar-poncho/dist/css/poncho.min.css' | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ '/node_modules/ar-poncho/dist/css/documentacion.css' | prepend: site.baseurl }}" rel="stylesheet">
+    <link href="{{ '/node_modules/ar-poncho/dist/icono-arg.css' | prepend: site.baseurl }}" rel="stylesheet">
+    Al solo efecto de esta documentaciÃ³n, usaremos los estilos en lÃ­nea en el proyecto GitHub Poncho
+  -->
+
+    <link href="https://cdn.jsdelivr.net/gh/argob/poncho@master/dist/css/encode-fontface.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/argob/poncho@master/dist/css/poncho.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/argob/poncho@master/dist/css/documentacion.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/argob/poncho@master/dist/css/icono-arg.css" rel="stylesheet">
+
+
+ <!-- FIN PONCHO -->
+
+
+
+
+
+
+		
+           <!-- Bootstrap  -->
+
+
+
+        <link rel="stylesheet" href="/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/dist/css/poncho.css">
+        <link rel="stylesheet" href="/dist/css/argentina.css">
+
+   <!--    <link rel="stylesheet" href="dist/css/PROPIOS.css"> -->
+
+      <!-- font-awesome  -->
+
+  <link rel="stylesheet" href="/dist/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/dist/css/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="/dist/css/droid-serif.css">
+  <link rel="stylesheet" href="/dist/css/roboto-fontface.css">
+
+
+      <link rel="stylesheet" href="/dist/css/PROPIOS.css">
+
+
+
+
+
+
+ 
+
+
+
+		<style>
+			.jumbotron .jumbotron_bar{
+				background-color: #082b48;
+			}
+
+			.content_format h2{
+				margin-top: 0px;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+							
+			td,	th {
+				text-align: center;
+			}
+
+			#iframemapa {
+				margin-top: 20px;
+				width: 100%;
+				height: 630px;
+				border: 0px;
+				padding: 1px;
+			}
+			
+			.iframe_modal{
+				width: 100%;
+				border: 0px;
+				height: 280px;
+			}
+
+			a:link {
+				text-decoration: none;
+			}
+			
+			.text-red { 
+				color: red;
+			}
+
+			.modal_size{
+		   		width: 50%;
+		   		border: 0px;	   
+			}
+
+
+			.titulo_grafico {
+				font-size: 1.5rem;
+				margin-bottom: 5px;
+			}
+
+			.rango_fecha_grafico {
+				font-size: 0.85rem;
+				font-weight: normal;
+				color: #555;
+			}
+
+			.barra_paginado {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 10px;
+				margin-bottom: 15px;
+			}
+
+			@media (max-width: 768px) {
+				.modal_size{
+		   		width: 95%;
+		   		border: 0px;
+			}
+
+			.titulo_grafico {
+				font-size: 0.9rem;
+			}
+
+			.rango_fecha_grafico {
+				font-size: 0.75rem;
+			}
+		}
+
+	
+		</style>
+
+    </head>
+
+    <body>
+
+		<header>
+			<!--  INICIO BARRA DE NAVEGACION     -->
+
+			<a href="#main" class="skipcontenido">
+  Salta al contenido
+</a>
+
+
+           <nav class="navbar navbar-top navbar-default bordeinferior">
+				
+					<div class="container">
+						
+						
+						<div class="navbar-header">
+                        
+ 
+	                        <a class="navbar-brand" href="/" accesskey="1">
+	                            <img alt="Servicio de Hidrografia Naval" src="/assets/images/Logo_shn_RepArg.svg" height="49">
+	                            <h1 class="sr-only"><small>Servicio de HidrografÃ­a Naval</small></h1>
+	                        </a>
+
+
+	                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+	                            <span class="sr-only">Toggle navigation</span>
+	                            <span class="icon-bar"></span>
+	                            <span class="icon-bar"></span>
+	                            <span class="icon-bar"></span>
+	                        </button>
+                    	</div>
+							
+						
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"  >
+						<ul class="nav navbar-nav navbar-right" >
+
+
+							<li class="dropdown" >
+							<a href="#" aria-expanded="false" accesskey="2" class="dropdown-toggle" data-toggle="dropdown"> productos y servicios <span class="caret"></span></a>
+
+								<ul class="dropdown-menu submenu" role="menu">
+
+		                                <div>
+		                                                             
+		                                    <div>
+<UL class="sinbullets">
+
+		                                        <li><a href="http://geoportal.shn.gob.ar/#/geoportal" target="_blank">Geoportal</a></li>
+		                                        <li><a href="/ServiciosNauticos.asp">Servicios NÃ¡uticos</a></li>
+		                                        <li><a href="/ModelosPronosticos.asp">Modelos y PronÃ³sticos</a></li>
+		                                        <li><a href="/Smara/glacio/sglaciologica.asp">Servicios de Hielo</a></li>
+		                                        <li><a href="/Observatorio/Astronomia.asp">AstronomÃ­a</a></li>
+		                                        <li><a href="/Observatorio/LaHora.asp">Hora Oficial y Frecuencia PatrÃ³n</a></li>
+
+</UL>		                                       
+		                                  </div>
+		                              
+		                                </div>
+
+
+		                                
+		                                <div>
+
+
+		                                
+		                                <div>
+
+
+		                                
+
+		                                
+		                            </ul>
+
+					</li>
+
+
+							
+					<li class="">
+					<a href="/Institucional/Institucional.asp" aria-expanded="false" class="" data-toggle="" accesskey="3"> institucional </a>
+
+
+					</li>
+
+
+ 							<li class="">
+							<a href="/ID/ID.asp" aria-expanded="false" class="" data-toggle="" accesskey="4"> I + D </a>
+								
+							</li>
+
+							<li class="">
+							 <a href="/DA/DatosAbiertos.asp" aria-expanded="false" class="" data-toggle="" accesskey="5"> Datos Abiertos </a>
+
+							</li>
+
+
+						
+
+							<li class="">
+							 <a href="/contactos/contactos.asp" aria-expanded="false" class="" data-toggle="" accesskey="6"> Contactos </a>
+
+							</li>
+
+
+						
+
+							<li class="">
+							 <a href="/ventas/ventas.asp" aria-expanded="false" class="" data-toggle="" accesskey="7"> ventas </a>
+
+							</li>
+
+
+
+							<li class="">
+
+							<a class="fa fa-download" accesskey="8" title="Descargas" aria-hidden="true" href="/download/download.asp"></a>
+
+							</li>
+
+
+
+
+							<li class="">
+
+							<a class="fa fa-search" accesskey="9" title="Buscador" aria-hidden="true" href="/buscador/tbuscador.asp"></a>
+
+							</li>
+
+
+
+
+
+
+
+							<li class="">
+
+							<a class="fa fa-instagram" aria-hidden="true" href="https://www.instagram.com/shn_argentina/?utm_medium=copy_link" title="Seguinos en Instagram"></a>
+
+							</li>
+
+
+
+
+
+
+
+							
+						</ul>
+							
+						</div>
+						
+
+					</div>
+
+
+				
+			</nav>
+
+
+
+
+
+    <script src="/dist/js/jquery.js"></script>
+    <script src="/dist/js/bootstrap.min.js"></script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
+      })
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+			<!--  FIN BARRA DE NAVEGACION     -->
+		</header>
+
+		<main id="main">
+
+			
+
+			<section class="jumbotron bg-primary" style="background-image: url('/dist/images/TRANSPfondo.jpg');">
+
+				<div class="jumbotron_bar">
+					<div class="container">
+
+						<div class="row">
+							<div class="col-md-12">
+								<ol class="breadcrumb">
+									<li><a href="/">Inicio</a></li>
+										<li><a href="/ServiciosNauticos.asp">Servicios NÃ¡uticos</a></li>
+									<li class="active"><span>Alturas Horarias de Marea</span></li>										
+								</ol>
+								<!-- INICIO SUBMENU DE LA DERECHA -->
+
+								<!-- FIN SUBMENU DE LA DERECHA -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="jumbotron_body">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+								<h1>Alturas Horarias de Marea</h1>
+								 
+									<p class="m-0"> <small>Los ceros de los mareÃ³grafos del RÃ­o de la Plata se encuentran referidos al </small> </p>
+									<p class="m-0"> <small> "Plano &Uacute;nico de ReducciÃ³n de Sondajes del RÃ­o de la Plata" del Servicio de HidrografÃ­a Naval.</small></p>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="overlay"> </div>
+			</section>
+
+			<section>
+             
+				<article class="container content_format">
+					<div>
+						<div class="row">
+							<div class="section-actions social-share">
+								<p>Compartir en <br> redes sociales</p>
+
+								  <ul class="list-inline">
+    <li><a href="http://www.facebook.com/sharer/sharer.php?u=http://www.hidro.gov.ar/oceanografia/alturashorarias.asp" title="Compartir en Facebook"><span class="icono-arg-facebook-f-"></span></a></li>
+    <li><a href="https://twitter.com/share" title="Compartir en Twitter"><span class="icono-arg-twitter-pajaro"></span></a></li>
+ 
+  </ul>
+							</div>
+						</div>
+
+
+
+						<!-- *******************   INICIO   *****   INGRESO DE INFORMACION ************************* -->
+
+						
+
+
+<BR/>
+
+
+
+
+							
+						<!--  INICIO DE ADVERTENCIA -->
+						
+
+
+
+						<!--   FIN DE ADVERTENCIA -->
+						
+						<div style="overflow-x:auto;">
+						
+							<table class="table table-striped">
+								<caption class="hidden"><h2>Alturas Horarias de los mareÃ³grafos</h2></caption>
+							<thead>
+								<tr>
+									<th></th>
+									
+									
+											<th class="text-left" > 
+												MareÃ³grafo 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>12:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>11:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>10:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>09:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>08:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>07:45 
+											</th>
+									
+											<th  > 
+												10/09/2026<br>06:45 
+											</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="MAGA"
+											   data-nombre="MartÃ­n GarcÃ­a"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="MAGA"
+													   data-nombre="MartÃ­n GarcÃ­a"
+													   data-fecha="202609101245">
+														MartÃ­n GarcÃ­a
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.46 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.46 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="SFER"
+											   data-nombre="San Fernando"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="SFER"
+													   data-nombre="San Fernando"
+													   data-fecha="202609101245">
+														San Fernando
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.84 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.93 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.07 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.20 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.36 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.49 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.59 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="BSAS"
+											   data-nombre="Buenos Aires"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="BSAS"
+													   data-nombre="Buenos Aires"
+													   data-fecha="202609101245">
+														Buenos Aires
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.72 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.80 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.97 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.10 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.25 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.44 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.55 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="PNOR"
+											   data-nombre="Pilote Norden"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   text-red"
+													   data-estacion="PNOR"
+													   data-nombre="Pilote Norden"
+													   data-fecha="202609101245">
+														Pilote Norden
+													</a>
+													
+															(***)
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 0.73 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 0.78 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 0.87 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 0.97 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 1.10 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 1.22 </td>
+											
+												<!-- Lecturas -->
+												
+												<td class="text-red"> 1.33 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="LPLA"
+											   data-nombre="La Plata"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="LPLA"
+													   data-nombre="La Plata"
+													   data-fecha="202609101245">
+														La Plata
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.73 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.71 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.80 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.90 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.03 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.27 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.27 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="ATAL"
+											   data-nombre="Atalaya"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="ATAL"
+													   data-nombre="Atalaya"
+													   data-fecha="202609101245">
+														Atalaya
+													</a>
+													
+															(**)
+														
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.87 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.82 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.67 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.67 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.75 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.84 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.97 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="OYAR"
+											   data-nombre="Oyarvide"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="OYAR"
+													   data-nombre="Oyarvide"
+													   data-fecha="202609101245">
+														Oyarvide
+													</a>
+													
+															(*)
+														
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > S/D </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.95 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.83 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.67 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.60 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.63 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.72 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="SCLE"
+											   data-nombre="San Clemente"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="SCLE"
+													   data-nombre="San Clemente"
+													   data-fecha="202609101245">
+														San Clemente
+													</a>
+													
+															(*)
+														
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.70 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.91 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.02 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.09 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.09 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.10 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.07 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="MDPL"
+											   data-nombre="Mar del Plata"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="MDPL"
+													   data-nombre="Mar del Plata"
+													   data-fecha="202609101245">
+														Mar del Plata
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.76 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.68 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.74 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.84 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.88 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.00 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.05 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="PTBL"
+											   data-nombre="Puerto Belgrano"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="PTBL"
+													   data-nombre="Puerto Belgrano"
+													   data-fecha="202609101245">
+														Puerto Belgrano
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 2.02 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.50 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.22 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 1.61 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 2.18 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 2.88 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 3.36 </td>
+											
+								</tr>
+								
+								<tr> 
+										<td>
+											<a href="#"
+											   role="button"
+											   class="openmodal"
+											   data-estacion="USHU"
+											   data-nombre="Ushuaia"
+											   data-fecha="202609101245">
+												<img src="img/iconografico.svg" alt="Curva Mareografo" style="width: 30px"/>
+											</a>
+										</td>
+										
+												<td class="text-left">
+													<!-- Mareografo -->
+													
+													<a href="#"
+													   role="button"
+													   class="openmodal
+													   "
+													   data-estacion="USHU"
+													   data-nombre="Ushuaia"
+													   data-fecha="202609101245">
+														Ushuaia
+													</a>
+													
+													
+												</td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.94 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.65 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.39 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.30 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.39 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.67 </td>
+											
+												<!-- Lecturas -->
+												
+												<td > 0.96 </td>
+											
+								</tr>
+								
+							</tbody>
+							</table>
+						</div>
+
+						
+						<div class="barra_paginado">
+							<form method="get" action="AlturasHorarias.asp" class="form-inline">
+								<div class="form-group">
+									<label for="pagina">Alturas &uacute;ltimos 10 dias:</label>
+									<select style="font-size: 14px;" id="pagina" name="pagina" class="form-control" onchange="this.form.submit();">
+										
+										<option  value="1" selected>
+											10/09/2026 12:45 - 10/09/2026 06:45
+										</option>
+										
+										<option  value="2" >
+											10/09/2026 05:45 - 09/09/2026 23:45
+										</option>
+										
+										<option  value="3" >
+											09/09/2026 22:45 - 09/09/2026 16:45
+										</option>
+										
+										<option  value="4" >
+											09/09/2026 15:45 - 09/09/2026 09:45
+										</option>
+										
+										<option  value="5" >
+											09/09/2026 08:45 - 09/09/2026 02:45
+										</option>
+										
+										<option  value="6" >
+											09/09/2026 01:45 - 08/09/2026 19:45
+										</option>
+										
+										<option  value="7" >
+											08/09/2026 18:45 - 08/09/2026 12:45
+										</option>
+										
+										<option  value="8" >
+											08/09/2026 11:45 - 08/09/2026 05:45
+										</option>
+										
+										<option  value="9" >
+											08/09/2026 04:45 - 07/09/2026 22:45
+										</option>
+										
+										<option  value="10" >
+											07/09/2026 21:45 - 07/09/2026 15:45
+										</option>
+										
+										<option  value="11" >
+											07/09/2026 14:45 - 07/09/2026 08:45
+										</option>
+										
+										<option  value="12" >
+											07/09/2026 07:45 - 07/09/2026 01:45
+										</option>
+										
+										<option  value="13" >
+											07/09/2026 00:45 - 06/09/2026 18:45
+										</option>
+										
+										<option  value="14" >
+											06/09/2026 17:45 - 06/09/2026 11:45
+										</option>
+										
+										<option  value="15" >
+											06/09/2026 10:45 - 06/09/2026 04:45
+										</option>
+										
+										<option  value="16" >
+											06/09/2026 03:45 - 05/09/2026 21:45
+										</option>
+										
+										<option  value="17" >
+											05/09/2026 20:45 - 05/09/2026 14:45
+										</option>
+										
+										<option  value="18" >
+											05/09/2026 13:45 - 05/09/2026 07:45
+										</option>
+										
+										<option  value="19" >
+											05/09/2026 06:45 - 05/09/2026 00:45
+										</option>
+										
+										<option  value="20" >
+											04/09/2026 23:45 - 04/09/2026 17:45
+										</option>
+										
+										<option  value="21" >
+											04/09/2026 16:45 - 04/09/2026 10:45
+										</option>
+										
+										<option  value="22" >
+											04/09/2026 09:45 - 04/09/2026 03:45
+										</option>
+										
+										<option  value="23" >
+											04/09/2026 02:45 - 03/09/2026 20:45
+										</option>
+										
+										<option  value="24" >
+											03/09/2026 19:45 - 03/09/2026 13:45
+										</option>
+										
+										<option  value="25" >
+											03/09/2026 12:45 - 03/09/2026 06:45
+										</option>
+										
+										<option  value="26" >
+											03/09/2026 05:45 - 02/09/2026 23:45
+										</option>
+										
+										<option  value="27" >
+											02/09/2026 22:45 - 02/09/2026 16:45
+										</option>
+										
+										<option  value="28" >
+											02/09/2026 15:45 - 02/09/2026 09:45
+										</option>
+										
+										<option  value="29" >
+											02/09/2026 08:45 - 02/09/2026 02:45
+										</option>
+										
+										<option  value="30" >
+											02/09/2026 01:45 - 01/09/2026 19:45
+										</option>
+										
+										<option  value="31" >
+											01/09/2026 18:45 - 01/09/2026 12:45
+										</option>
+										
+										<option  value="32" >
+											01/09/2026 11:45 - 01/09/2026 05:45
+										</option>
+										
+										<option  value="33" >
+											01/09/2026 04:45 - 31/08/2026 22:45
+										</option>
+										
+										<option  value="34" >
+											31/08/2026 21:45 - 31/08/2026 15:45
+										</option>
+										
+										<option  value="35" >
+											31/08/2026 14:45 - 31/08/2026 13:45
+										</option>
+										
+									</select>
+									<noscript><button type="submit" class="btn btn-default">Ver</button></noscript>
+								</div>
+							</form>
+
+							<a href="AlturasHorarias.asp?export=csv" class="btn btn-default" role="button">
+								Descargar CSV (10 dÃ­as)
+							</a>
+						</div>
+						
+
+						<iframe id="iframemapa" name="iframemapa" class="mb-3" title="UbicaciÃ³n de los mareÃ³grafos" src="PosMareog_ArgenMap.asp">
+						</iframe>
+
+						
+
+
+						<div class="alert alert-info" role="alert">
+							<p class="negrita">NOTAS:</p>
+							<ul>
+								<li>S/D: Sin Datos.</li>
+								<li>F/S: Fuera de Servicio.</li>
+								<li>(*) InformaciÃ³n suministrada  por la DirecciÃ³n Nacional de VÃ­as Navegables (DNVN).</li>
+
+								<li>(**)  ATALAYA: Bajo condiciones hidro meteorolÃ³gicas normales, las alturas de Atalaya presentan alturas similares a la Torre Oyarvide conservando el mismo (0) cero y un retardo del orden de (2) dos horas.<br/>              Con respecto al Puerto de Buenos Aires, presenta un anticipo de (4) cuatro horas.</li>
+								 
+									<li>(***) PILOTE NORDEN: InformaciÃ³n suministrada por la ComisiÃ³n Administradora del RÃ­o de la Plata (CARP). 
+									<span class="text-red">Para referir las alturas observadas en Pilote Norden al Plano Ãnico de ReducciÃ³n de Sondajes del RÃ­o de la Plata, el Servicio de HidrografÃ­a Naval aplica una correcciÃ³n de +0.35 m a las observaciones publicadas por la ComisiÃ³n Administradora del RÃ­o de la Plata.</span></li>
+								
+							</ul>
+						</div>
+
+						
+
+						<!-- ******************   FIN  ******     INGRESO DE INFORMACION ********************* -->
+					</div>
+				</article> 
+
+            </section>
+
+            
+
+
+
+<section class="modulo-contacto">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+          <h2 class="section-title">Contacto</h2>
+          <div>
+            <h3 class="h5">Servicio de HidrografÃ­a Naval</h3>
+
+<ul class="menu nav">
+    <li class="first leaf"> <strong>DirecciÃ³n:</strong> Av. Montes de Oca 2124</li>
+    <li class="first leaf"> <strong>CÃ³digo Postal:</strong> C1270ABV</li>
+    <li class="first leaf"> <strong>TelÃ©fono:</strong> (+54 11) 4301-0062 / 4301-0064 / 4301-0066 / 4301-0067</li>
+    <li class="last leaf"> <strong>Correo electrÃ³nico: </strong>shn@hidro.gov.ar</li>
+</ul>
+<br>
+            <h3 class="h5">Redes sociales del Ã¡rea</h3>
+ <div class="social-btn">
+	<ul>
+
+
+
+
+	<li>
+		<a href="https://twitter.com/SHN_Argentina" target="blank" title="Seguinos en Twitter"><span class="maschico icono-arg-twitter-pajaro" aria-hidden="true"></span></a>
+			
+	</li>
+												
+
+	<li>
+		<a href="/rss/rss.asp" target="blank" title="Seguinos en RSS">	<span class="fa fa-rss" aria-hidden="true"></span></a>
+
+	</li>
+
+
+	<li>
+		<a href="https://instagram.com/shn_argentina?utm_medium=copy_link" target="blank" title="Seguinos en Instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a>
+		</li>
+
+
+
+
+	<li>
+
+		<a href="https://www.youtube.com/channel/UCTWs-jNTBiGlqgfsAOGl8jQ" target="blank" title="Seguinos en YouTube"><span class="fa fa-youtube-square" aria-hidden="true"></span></a>
+
+	</li>
+
+
+															
+												
+	</ul>
+		</div>
+
+          </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div>
+ 
+
+
+<iframe class="ccsiframe" title="Mapa con la ubicaciÃ³n del Servicio de HidrografÃ­a Naval" src="/nautica/mapashn_ArgenMap.asp"></iframe>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</section>
+
+ 
+
+        </main>
+
+         <footer class="main-footer">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <span class="text-muted small">Â© Copyright - Todos los Derechos Reservados - Servicio de HidrografÃ­a Naval</span>&nbsp;|&nbsp;
+
+
+<span class="text-muted small"><a href="/sitio/sitio.asp" accesskey="0">Mapa del Sitio</a></span>&nbsp;|&nbsp;<span class="text-muted small"><a href="/accesibilidad/accesibilidad.asp">Accesibilidad Web</a></span>
+
+
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+		<!-- modal grafico -->
+		<div id="modal"  class="modal fade " tabindex="-1" role="dialog" >
+			<div class="modal-dialog modal_size" >
+			<div class="modal-content" >
+				<div class="modal-body">
+					<span class="titulo_grafico" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; ">
+						<span id="nombre_estacion"></span>
+						<small id="rango_fecha_grafico" class="rango_fecha_grafico"></small>
+					</span>
+					<canvas  id="grafico"></canvas>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+			</div>
+		</div>
+
+    </body>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script type="module" src="js/grafico-init.js"></script>
+
+</html>
+
+
