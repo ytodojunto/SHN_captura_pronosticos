@@ -9,6 +9,10 @@ acierto real de cada corrección meteorológica.
 La página solo expone una ventana móvil de 10 días (después se
 pierde), así que conviene correr esto seguido para no perder datos.
 
+Formato real confirmado 2026-09-10: separado por ';' (no ','), y cada
+FILA es un timestamp ("Fecha y hora"), con los mareografos como
+columnas. Celdas sin dato vienen como "S/D".
+
 Guarda dos cosas por corrida:
   - el archivo crudo tal cual lo devolvió el sitio (por si el
     parseo de abajo está mal armado — así no se pierde nada y se
@@ -32,31 +36,30 @@ RAW_DIR = DATA_DIR / "alturas_raw"
 
 
 def parsear_como_csv(texto: str) -> list[dict]:
-    """Intenta leerlo como CSV en formato ancho: primera columna
-    mareógrafo, columnas siguientes = timestamps, celdas = altura."""
-    lector = csv.reader(io.StringIO(texto))
+    """Formato real: cada FILA es un timestamp, las columnas siguientes
+    son los mareografos. Separador ';'. Sin dato = "S/D"."""
+    lector = csv.reader(io.StringIO(texto), delimiter=";")
     filas = [f for f in lector if any(c.strip() for c in f)]
     if len(filas) < 2:
         return []
     encabezado = filas[0]
-    timestamps = encabezado[1:]
+    estaciones = [e.strip() for e in encabezado[1:]]
     registros = []
     for fila in filas[1:]:
         if not fila or not fila[0].strip():
             continue
-        estacion = fila[0].strip()
-        for ts, valor in zip(timestamps, fila[1:]):
+        fecha_hora = fila[0].strip()
+        for estacion, valor in zip(estaciones, fila[1:]):
             valor = (valor or "").strip()
-            ts = (ts or "").strip()
-            if not valor or not ts:
+            if not valor or valor.upper() == "S/D":
                 continue
-            registros.append({"estacion": estacion, "fecha_hora": ts, "altura_m": valor})
+            registros.append({"estacion": estacion, "fecha_hora": fecha_hora, "altura_m": valor})
     return registros
 
 
 def parsear_como_html(html: str) -> list[dict]:
-    """Fallback si export=csv en realidad devuelve HTML (algunas
-    páginas ASP lo hacen). Misma forma ancha, pero desde <table>."""
+    """Fallback si export=csv en realidad devuelve HTML. Misma
+    orientación que el CSV: cada fila de la tabla es un timestamp."""
     soup = BeautifulSoup(html, "html.parser")
     registros = []
     for table in soup.find_all("table"):
@@ -66,16 +69,16 @@ def parsear_como_html(html: str) -> list[dict]:
         encabezado = [c.get_text(strip=True) for c in filas[0].find_all(["td", "th"])]
         if len(encabezado) < 2:
             continue
-        timestamps = encabezado[1:]
+        estaciones = encabezado[1:]
         for fila in filas[1:]:
             celdas = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
             if not celdas or not celdas[0]:
                 continue
-            estacion = celdas[0]
-            for ts, valor in zip(timestamps, celdas[1:]):
-                if not valor or not ts:
+            fecha_hora = celdas[0]
+            for estacion, valor in zip(estaciones, celdas[1:]):
+                if not valor or valor.upper() == "S/D":
                     continue
-                registros.append({"estacion": estacion, "fecha_hora": ts, "altura_m": valor})
+                registros.append({"estacion": estacion, "fecha_hora": fecha_hora, "altura_m": valor})
     return registros
 
 
@@ -95,8 +98,6 @@ def main():
 
     registros = parsear_como_html(contenido) if es_html else parsear_como_csv(contenido)
 
-    # Si el export=csv no vino bien pero tampoco parseó nada, probamos
-    # la página HTML normal como último recurso.
     if not registros:
         resp2 = requests.get(URL_HTML, timeout=30, headers=headers)
         resp2.raise_for_status()
@@ -107,19 +108,3 @@ def main():
 
     snapshot = {
         "capturado_en": datetime.now(timezone.utc).isoformat(),
-        "fuente": "html" if es_html else "csv",
-        "cantidad_registros": len(registros),
-        "mediciones": registros,
-    }
-
-    salida = DATA_DIR / f"alturas_{ts}.json"
-    salida.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Guardado: {salida} ({len(registros)} mediciones)")
-
-    historico_path = DATA_DIR / "historico_alturas.jsonl"
-    with historico_path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(snapshot, ensure_ascii=False) + "\n")
-
-
-if __name__ == "__main__":
-    main()
