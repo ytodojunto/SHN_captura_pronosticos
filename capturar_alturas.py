@@ -108,3 +108,19 @@ def main():
 
     snapshot = {
         "capturado_en": datetime.now(timezone.utc).isoformat(),
+        "fuente": "html" if es_html else "csv",
+        "cantidad_registros": len(registros),
+        "mediciones": registros,
+    }
+
+    salida = DATA_DIR / f"alturas_{ts}.json"
+    salida.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Guardado: {salida} ({len(registros)} mediciones)")
+
+    historico_path = DATA_DIR / "historico_alturas.jsonl"
+    with historico_path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(snapshot, ensure_ascii=False) + "\n")
+
+
+if __name__ == "__main__":
+    main()
