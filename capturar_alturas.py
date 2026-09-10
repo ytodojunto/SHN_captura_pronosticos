@@ -32,31 +32,36 @@ RAW_DIR = DATA_DIR / "alturas_raw"
 
 
 def parsear_como_csv(texto: str) -> list[dict]:
-    """Intenta leerlo como CSV en formato ancho: primera columna
-    mareógrafo, columnas siguientes = timestamps, celdas = altura."""
-    lector = csv.reader(io.StringIO(texto))
+    """Formato real confirmado 2026-09-10: separado por ';' (no ','),
+    y AL REVES de lo que se habia asumido en la primera version — cada
+    FILA es un timestamp ("Fecha y hora") y las columnas siguientes
+    son los mareografos (Martín García, San Fernando, Buenos Aires,
+    Pilote Norden, La Plata, Atalaya, Oyarvide, San Clemente, Mar del
+    Plata, Puerto Belgrano, Ushuaia). Celdas sin dato vienen como
+    "S/D" (sin datos), no vacias."""
+    lector = csv.reader(io.StringIO(texto), delimiter=";")
     filas = [f for f in lector if any(c.strip() for c in f)]
     if len(filas) < 2:
         return []
     encabezado = filas[0]
-    timestamps = encabezado[1:]
+    estaciones = [e.strip() for e in encabezado[1:]]
     registros = []
     for fila in filas[1:]:
         if not fila or not fila[0].strip():
             continue
-        estacion = fila[0].strip()
-        for ts, valor in zip(timestamps, fila[1:]):
+        fecha_hora = fila[0].strip()
+        for estacion, valor in zip(estaciones, fila[1:]):
             valor = (valor or "").strip()
-            ts = (ts or "").strip()
-            if not valor or not ts:
+            if not valor or valor.upper() == "S/D":
                 continue
-            registros.append({"estacion": estacion, "fecha_hora": ts, "altura_m": valor})
+            registros.append({"estacion": estacion, "fecha_hora": fecha_hora, "altura_m": valor})
     return registros
 
 
 def parsear_como_html(html: str) -> list[dict]:
     """Fallback si export=csv en realidad devuelve HTML (algunas
-    páginas ASP lo hacen). Misma forma ancha, pero desde <table>."""
+    páginas ASP lo hacen). Misma orientación que el CSV: cada fila de
+    la tabla es un timestamp, las columnas son los mareografos."""
     soup = BeautifulSoup(html, "html.parser")
     registros = []
     for table in soup.find_all("table"):
@@ -66,16 +71,16 @@ def parsear_como_html(html: str) -> list[dict]:
         encabezado = [c.get_text(strip=True) for c in filas[0].find_all(["td", "th"])]
         if len(encabezado) < 2:
             continue
-        timestamps = encabezado[1:]
+        estaciones = encabezado[1:]
         for fila in filas[1:]:
             celdas = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
             if not celdas or not celdas[0]:
                 continue
-            estacion = celdas[0]
-            for ts, valor in zip(timestamps, celdas[1:]):
-                if not valor or not ts:
+            fecha_hora = celdas[0]
+            for estacion, valor in zip(estaciones, celdas[1:]):
+                if not valor or valor.upper() == "S/D":
                     continue
-                registros.append({"estacion": estacion, "fecha_hora": ts, "altura_m": valor})
+                registros.append({"estacion": estacion, "fecha_hora": fecha_hora, "altura_m": valor})
     return registros
 
 
