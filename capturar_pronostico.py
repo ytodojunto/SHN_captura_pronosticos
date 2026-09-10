@@ -44,7 +44,17 @@ def parsear_pronostico(html: str) -> dict:
         m = re.search(patron, texto, re.DOTALL)
         secciones[clave] = m.group(1).strip() if m else None
 
-    # Tablas: cada <table> del pronóstico tiene filas LUGAR/ESTADO/HORA/ALTURA/FECHA
+    # Tablas: cada <table> del pronóstico tiene filas LUGAR/ESTADO/HORA/ALTURA/FECHA.
+    # OJO (bug encontrado 2026-09-10): NO se puede confiar en la cantidad de
+    # celdas para saber si una fila repite el LUGAR o no — el SHN a veces
+    # manda la fila de continuación con 3 celdas (ESTADO,HORA,ALTURA) y a
+    # veces con 4 (ESTADO,HORA,ALTURA,FECHA), y con la cuenta de celdas sola
+    # esa segunda variante se confundía con una fila completa, corriendo
+    # todos los campos una posición (quedaba "estado"="17:00", etc). En vez
+    # de contar celdas, se detecta la continuación por contenido: si la
+    # primera celda es literalmente BAJAMAR o PLEAMAR, es continuación (no
+    # trae LUGAR); si no, la primera celda es el LUGAR.
+    ESTADOS = {"BAJAMAR", "PLEAMAR"}
     puertos = []
     lugar_actual = None
     for table in soup.find_all("table"):
@@ -53,16 +63,24 @@ def parsear_pronostico(html: str) -> dict:
             celdas = [c for c in celdas if c]
             if not celdas or celdas[0].upper() in ("LUGAR", "ESTADO"):
                 continue
-            if len(celdas) >= 4:
-                # fila completa: LUGAR, ESTADO, HORA, ALTURA, FECHA
-                lugar_actual = celdas[0]
-                estado, hora, altura, fecha = celdas[1], celdas[2], celdas[3], celdas[4] if len(celdas) > 4 else None
-            elif len(celdas) == 3 and lugar_actual:
-                # fila de continuación (mismo puerto, sin repetir LUGAR)
-                estado, hora, altura = celdas[0], celdas[1], celdas[2]
-                fecha = None
+
+            if celdas[0].upper() in ESTADOS:
+                # fila de continuación: no repite el LUGAR
+                if lugar_actual is None:
+                    continue  # fila de continuación sin lugar previo, no debería pasar
+                resto = celdas
             else:
-                continue
+                # fila completa: la primera celda es el LUGAR
+                lugar_actual = celdas[0]
+                resto = celdas[1:]
+
+            if len(resto) < 2:
+                continue  # no alcanza ni para estado+hora, descarto
+            estado = resto[0]
+            hora = resto[1]
+            altura = resto[2] if len(resto) > 2 else None
+            fecha = resto[3] if len(resto) > 3 else None
+
             puertos.append(
                 {
                     "lugar": lugar_actual,
