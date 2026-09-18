@@ -1,0 +1,87 @@
+{
+  "capturado_en": "2026-09-18T23:06:38.334637+00:00",
+  "fecha_pronostico": "18 DE SEPTIEMBRE DE 2026",
+  "valido_desde": "18/09/2026 15:00",
+  "valido_hasta": "19/09/2026 03:00",
+  "correccion_interior": null,
+  "correccion_exterior": null,
+  "puertos": [
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "BAJAMAR",
+      "hora": "17:00",
+      "altura_m": "0.95",
+      "fecha": "18/09/2026"
+    },
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "PLEAMAR",
+      "hora": "22:30",
+      "altura_m": "1.15",
+      "fecha": "18/09/2026"
+    },
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "BAJAMAR",
+      "hora": "06:30",
+      "altura_m": "0.55",
+      "fecha": "19/09/2026"
+    },
+    {
+      "lugar": "PUERTO DE BUENOS AIRES (Muelle de Pescadores)",
+      "estado": "BAJAMAR",
+      "hora": "19:00",
+      "altura_m": "0.85",
+      "fecha": "18/09/2026"
+    },
+    {
+      "lugar": "PUERTO DE BUENOS AIRES (Muelle de Pescadores)",
+      "estado": "PLEAMAR",
+      "hora": "00:30",
+      "altura_m": "1.20",
+      "fecha": "19/09/2026"
+    },
+    {
+      "lugar": "PUERTO DE BUENOS AIRES (Muelle de Pescadores)",
+      "estado": "BAJAMAR",
+      "hora": "08:30",
+      "altura_m": "0.45",
+      "fecha": "19/09/2026"
+    },
+    {
+      "lugar": "SAN FERNANDO",
+      "estado": "BAJAMAR",
+      "hora": "20:00",
+      "altura_m": "0.85",
+      "fecha": "18/09/2026"
+    },
+    {
+      "lugar": "SAN FERNANDO",
+      "estado": "PLEAMAR",
+      "hora": "01:30",
+      "altura_m": "1.20",
+      "fecha": "19/09/2026"
+    },
+    {
+      "lugar": "SAN FERNANDO",
+      "estado": "BAJAMAR",
+      "hora": "09:30",
+      "altura_m": "0.45",
+      "fecha": "19/09/2026"
+    },
+    {
+      "lugar": "CANAL PUNTA INDIO (Oyarvide - Km 133)",
+      "estado": "PLEAMAR",
+      "hora": "20:00",
+      "altura_m": "1.15",
+      "fecha": "18/09/2026"
+    },
+    {
+      "lugar": "CANAL PUNTA INDIO (Oyarvide - Km 133)",
+      "estado": "BAJAMAR",
+      "hora": "04:00",
+      "altura_m": "0.40",
+      "fecha": "19/09/2026"
+    }
+  ]
+}
