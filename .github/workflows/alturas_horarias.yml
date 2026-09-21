@@ -1,0 +1,36 @@
+name: Captura Alturas Horarias (SHN)
+
+on:
+  schedule:
+    # Cada hora, a los 55' (la página publica ~cada hora en punto)
+    - cron: "55 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4
+
+      - name: Ejecutar scraper de alturas horarias
+        run: python fetch_alturas_horarias.py
+
+      - name: Commit y push si hay cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/alturas_historico.jsonl
+          git diff --quiet --cached || git commit -m "Actualiza alturas horarias $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git push
