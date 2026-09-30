@@ -1,0 +1,73 @@
+{
+  "capturado_en": "2026-09-30T00:08:03.999041+00:00",
+  "fecha_pronostico": "29 DE SEPTIEMBRE DE 2026",
+  "valido_desde": "29/09/2026 15:00",
+  "valido_hasta": "30/09/2026 03:00",
+  "correccion_interior": null,
+  "correccion_exterior": null,
+  "puertos": [
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "PLEAMAR",
+      "hora": "19:00",
+      "altura_m": "1.35",
+      "fecha": "29/09/2026"
+    },
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "BAJAMAR",
+      "hora": "02:00",
+      "altura_m": "0.85",
+      "fecha": "30/09/2026"
+    },
+    {
+      "lugar": "PUERTO LA PLATA",
+      "estado": "PLEAMAR",
+      "hora": "08:00",
+      "altura_m": "1.40",
+      "fecha": "30/09/2026"
+    },
+    {
+      "lugar": "PUERTO DE BUENOS AIRES (Muelle de Pescadores)",
+      "estado": "PLEAMAR",
+      "hora": "21:00",
+      "altura_m": "1.20",
+      "fecha": "29/09/2026"
+    },
+    {
+      "lugar": "PUERTO DE BUENOS AIRES (Muelle de Pescadores)",
+      "estado": "BAJAMAR",
+      "hora": "04:00",
+      "altura_m": "0.80",
+      "fecha": "30/09/2026"
+    },
+    {
+      "lugar": "SAN FERNANDO",
+      "estado": "PLEAMAR",
+      "hora": "22:00",
+      "altura_m": "1.30",
+      "fecha": "29/09/2026"
+    },
+    {
+      "lugar": "SAN FERNANDO",
+      "estado": "BAJAMAR",
+      "hora": "05:00",
+      "altura_m": "0.85",
+      "fecha": "30/09/2026"
+    },
+    {
+      "lugar": "CANAL PUNTA INDIO (Oyarvide - Km 133)",
+      "estado": "BAJAMAR",
+      "hora": "23:00",
+      "altura_m": "0.70",
+      "fecha": "29/09/2026"
+    },
+    {
+      "lugar": "CANAL PUNTA INDIO (Oyarvide - Km 133)",
+      "estado": "PLEAMAR",
+      "hora": "05:00",
+      "altura_m": "1.70",
+      "fecha": "30/09/2026"
+    }
+  ]
+}
